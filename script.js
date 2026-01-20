@@ -3,7 +3,21 @@
 const tlačítko = document.getElementById("nova_hra"); //přístup k tlačítku
 
 function stisknutiTlacitka(){
-    window.location.reload()
+    win = false
+    Stridani = true
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    for (let i = 0; i < souradnice.length; i++) {
+        souradnice[i].stav = null
+        policka[i] = 0
+    }
+    ctx.lineWidth=2
+    ctx.strokeStyle="black"
+    ctx.beginPath()
+    for (let i = 0; i<souradnice.length; i++){
+        ctx.rect(souradnice[i].x, souradnice[i].y,145,145)
+    }
+    ctx.stroke()
+    ctx.closePath()
 }
 
 tlačítko.addEventListener("mousedown", stisknutiTlacitka)
@@ -179,3 +193,4 @@ function zkontrolujWin (){
         win=true
     }
 }
+
