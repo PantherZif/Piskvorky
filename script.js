@@ -1,31 +1,12 @@
-//console.log("Funguju!")
-
 // const -> proměnná (konstanta - nemění se)
 // let -> proměnná (může se měnit)
 const tlačítko = document.getElementById("nova_hra"); //přístup k tlačítku
-
-/*function stisknutiTlacitka(){
-    console.log("kliknul jsi na mě!")
-}*/
 
 function stisknutiTlacitka(){
     window.location.reload()
 }
 
-/*function novaHra() {
-    win=false
-    Stridani !=
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.lineWidth=2
-    ctx.strokeStyle="black"
-    for (let i = 0; i<souradnice.length; i++){
-    ctx.rect(souradnice[i].x, souradnice[i].y,145,145)
-}
-ctx.stroke()
-}*/
-
 tlačítko.addEventListener("mousedown", stisknutiTlacitka)
-
 
 //KRESLENI
 const canvas = document.getElementById("canvas");
@@ -33,7 +14,6 @@ const ctx = canvas.getContext("2d");
 
 ctx.lineWidth = 2;
 ctx.strokeStyle = "black"
-
 
 //KOLECKA
 function vytvorKolecko(x,y){
@@ -44,36 +24,12 @@ function vytvorKolecko(x,y){
     ctx.closePath()
 }
 
-//vytvorKolecko(72.5,72.5);
-
 function getCursorPosition(canvas, event) {
     const rect = canvas.getBoundingClientRect()
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
     return [x,y];
 }
-
-/*canvas.addEventListener('click', function(e) { 
-    const [x,y] = getCursorPosition(canvas, e)
-    vytvorKolecko(x, y)
-})*/
-//mousedown vs click
-//click ceka nez pustis tlacitko na mysi zpet nahoru
-//mousedown funguje hned pri stisknuti
-
-//VYLEPSENA VERZE UMISTOVANI KOLECEK
-/*canvas.addEventListener('click', function(e) {  
-    const [x,y] = getCursorPosition(canvas, e)
-
-    for (let i = 0; i<souradnice.length; i++){
-            if (x >= souradnice[i].x && x < souradnice[i].x + 145 && y >= souradnice[i].y && y < souradnice[i].y + 145) {
-                vytvorKolecko(souradnice[i].x+72.5, souradnice[i].y+72.5)
-                break
-            }
-    }
-})*/
-//mousedown reaguje i na stisknuti kolecka
-
 
 //KRIZEK
 function nakresliKrizek(x,y){
@@ -86,42 +42,9 @@ function nakresliKrizek(x,y){
     ctx.stroke()
     ctx.closePath()
 }
-//nastaveni na event "wheel" - otoceni koleckem na mysi
-/*canvas.addEventListener('wheel', function(e) {  
-    const [x,y] = getCursorPosition(canvas, e)
-
-    for (let i = 0; i<souradnice.length; i++){
-            if (x >= souradnice[i].x && x < souradnice[i].x + 145 && y >= souradnice[i].y && y < souradnice[i].y + 145) {
-                nakresliKrizek(souradnice[i].x, souradnice[i].y)
-                break
-            }
-    }
-})*/
-
 
 //STRIDANI
 let Stridani = true
-/*canvas.addEventListener('click', function(e) {
-    const [x,y] = getCursorPosition(canvas, e)
-    if(Stridani) {
-        for (let i = 0; i<souradnice.length; i++){
-            if (x >= souradnice[i].x && x < souradnice[i].x + 145 && y >= souradnice[i].y && y < souradnice[i].y + 145) {
-                nakresliKrizek(souradnice[i].x, souradnice[i].y)
-                break
-            }
-        }
-        Stridani=false
-    }
-    else {
-        for (let i = 0; i<souradnice.length; i++){
-            if (x >= souradnice[i].x && x < souradnice[i].x + 145 && y >= souradnice[i].y && y < souradnice[i].y + 145) {
-                vytvorKolecko(souradnice[i].x+72.5, souradnice[i].y+72.5)
-                break
-            }
-        }
-        Stridani=true
-    }
-})*/
 
 canvas.addEventListener('mousedown', function(e) {
     if (win==false){
@@ -143,7 +66,6 @@ canvas.addEventListener('mousedown', function(e) {
                 Stridani=true
                 }
                 zkontrolujWin()
-                //Remiza()
                 break
             }
         }
@@ -151,24 +73,6 @@ canvas.addEventListener('mousedown', function(e) {
 })
 
 //POLE
-/*ctx.beginPath()
-ctx.moveTo(0,0)
-ctx.lineTo(435, 0)
-ctx.lineTo(435, 435)
-ctx.lineTo(0, 435)
-ctx.lineTo(0, 0)
-ctx.moveTo(145,0)
-ctx.lineTo(145, 435)
-ctx.moveTo(290,435)
-ctx.lineTo(290, 0)
-ctx.moveTo(0, 145)
-ctx.lineTo(435, 145)
-ctx.moveTo(435,290)
-ctx.lineTo(0, 290)
-ctx.stroke()
-ctx.closePath();*/
-
-//ctx.rect(x, y, vyska, sirka) //Ctyruhelnik (prazdny)
 
 let policka = [
     {0:0},
@@ -199,24 +103,6 @@ const souradnice = [
     {"x": 145, "y": 290, stav: null},
     {"x": 290, "y": 290, stav: null}
 ]
-
-/*//prvni radek
-ctx.rect(0,0,145,145);
-ctx.rect(145,0,145,145);
-ctx.rect(290,0,145,145);
-
-//druhy radek
-ctx.rect(0,145,145,145);
-ctx.rect(145,145,145,145);
-ctx.rect(290,145,145,145);
-
-//treti radek
-ctx.rect(0,290,145,145);
-ctx.rect(145,290,145,145);
-ctx.rect(290,290,145,145);
-
-ctx.stroke();*/
-
 
 //misto int je tu let, jinak jako v C#
 for (let i = 0; i<souradnice.length; i++){
@@ -293,11 +179,3 @@ function zkontrolujWin (){
         win=true
     }
 }
-
-/*function Remiza() {
-    if (souradnice[0].stav !== null && souradnice[1].stav !== null && souradnice[2].stav !== null && souradnice[3].stav !== null && souradnice[4].stav !== null && souradnice[5].stav !== null && souradnice[6].stav !== null && souradnice[7].stav !== null && souradnice[8].stav !== null || win==true) {
-    setTimeout(() => {
-        stisknutiTlacitka()
-    }, 5000)
-    }
-}*/
